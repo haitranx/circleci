@@ -1,18 +1,17 @@
 version: 2.1
-orbs:
-  node: circleci/node@4.7.0
+
+workflows:
+  test-env-vars:
+    jobs:
+      - build
+
 jobs:
   build:
-    executor:
-      name: node/default
-      tag: '10.4'
+    docker:
+      - image: cimg/base:2020.01
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-      - run: npm run test
-workflows:
-    example-workflow:
-      jobs:
-        - node/run
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $Name
