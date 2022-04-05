@@ -12,3 +12,7 @@ jobs:
           steps:
             - run: npm install
       - run: npm run test
+workflows:
+    example-workflow:
+      jobs:
+        - node/run
